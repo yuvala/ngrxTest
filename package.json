@@ -1,0 +1,19 @@
+{
+  "name": "ngrxtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuvala/ngrxTest.git"
+  },
+  "author": "yuval",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuvala/ngrxTest/issues"
+  },
+  "homepage": "https://github.com/yuvala/ngrxTest#readme"
+}
