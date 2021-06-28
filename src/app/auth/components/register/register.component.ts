@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 
 import { registerAction } from "src/app/auth/store/actions";
 import { isSubmittingSelector } from "src/app/auth/store/selectors";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
     selector: "mc-register",
@@ -15,7 +16,11 @@ export class RegisterComponent implements OnInit {
     form!: FormGroup;
     isSubmitting$!: Observable<boolean>;
 
-    constructor(private fb: FormBuilder, private store: Store) {}
+    constructor(
+        private fb: FormBuilder,
+        private store: Store,
+        private authService: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.initializeForm();
@@ -32,10 +37,10 @@ export class RegisterComponent implements OnInit {
     initializeValues(): void {
         this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
         console.log("isSubmitting$", this.isSubmitting$);
-        
     }
     onSubmit(): void {
         this.store.dispatch(registerAction(this.form.value));
+        this.authService.register(this.form.value).subscribe();
         console.log(this.form.value);
     }
 }
