@@ -5,9 +5,15 @@ import { AuthStateInterface } from "src/app/auth/types/authState.interface";
 export const authFetureSelector = createFeatureSelector<
     AppStateInterface,
     AuthStateInterface
->("auth");
+>('auth');
 
 export const isSubmittingSelector = createSelector(
     authFetureSelector,
     (authSate: AuthStateInterface) => authSate.isSubmitting
+);
+
+
+export const validationErrorsSelector = createSelector(
+    authFetureSelector,
+    (authSate: AuthStateInterface) => authSate.validationErrors
 );

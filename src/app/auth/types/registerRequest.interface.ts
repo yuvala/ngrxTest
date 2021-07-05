@@ -1,5 +1,7 @@
 export interface RegisterRequestInterface {
-    username: string;
-    password: string;
-    email: string;
+    user: {
+        email: string;
+        password: string;
+        username: string;
+    };
 }

@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import { registerAction } from "src/app/auth/store/actions";
-import { isSubmittingSelector } from "src/app/auth/store/selectors";
-import { AuthService } from "../../services/auth.service";
+import { registerAction } from "src/app/auth/store/actions/register.actions";
+import { isSubmittingSelector, validationErrorsSelector } from "src/app/auth/store/selectors";
+import { AuthService } from "src/app/auth/services/auth.service";
+import { RegisterRequestInterface } from "../../types/registerRequest.interface";
+import { BackendErrorsInterface } from "src/app/shared/types/backendErrors.interface";
 
 @Component({
     selector: "mc-register",
@@ -13,14 +15,15 @@ import { AuthService } from "../../services/auth.service";
     styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent implements OnInit {
-    form!: FormGroup;
-    isSubmitting$!: Observable<boolean>;
+    form: FormGroup;
+    isSubmitting$: Observable<boolean>;
+    backendErrors$: Observable<BackendErrorsInterface | null>;
 
     constructor(
         private fb: FormBuilder,
         private store: Store,
         private authService: AuthService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.initializeForm();
@@ -36,11 +39,15 @@ export class RegisterComponent implements OnInit {
     }
     initializeValues(): void {
         this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
-        console.log("isSubmitting$", this.isSubmitting$);
+        this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
+        //console.log("isSubmitting$", this.isSubmitting$);
     }
     onSubmit(): void {
-        this.store.dispatch(registerAction(this.form.value));
-        this.authService.register(this.form.value).subscribe();
-        console.log(this.form.value);
+        console.log("submit", this.form.value);
+        const request: RegisterRequestInterface = {
+            user: this.form.value
+        };
+        this.store.dispatch(registerAction({ request }));
+        //   this.authService.register(this.form.value).subscribe();
     }
 }

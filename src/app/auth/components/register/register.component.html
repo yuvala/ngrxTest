@@ -7,7 +7,8 @@
                 <p class="text-xs-center">
                     <a [routerLink]="['/login']">Have an account?</a>
                 </p>
-                Back end error ar here
+                <mc-backend-error-messages *ngIf="backendErrors$ | async" [backendError]="backendErrors$ | async">
+                </mc-backend-error-messages>
                 <form [formGroup]="form" class="ng-untouched ng-pristine ng-invalid" (ngSubmit)="onSubmit()">
                     <fieldset>
                         <fieldset class="form-group">
