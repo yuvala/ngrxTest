@@ -10,6 +10,7 @@ import { reducers } from "src/app/auth/store/reducers";
 import { AuthService } from "src/app/auth/services/auth.service";
 import { registerEffect } from "src/app/auth/store/effects/register.effect";
 import { BackendErrorsMessagesModule } from "src/app/shared/backendErrorMessages/backendErrorMessages.module";
+import { PersistanceService } from "../shared/services/persistance.service";
 
 const routes: Routes = [
     {
@@ -28,6 +29,6 @@ const routes: Routes = [
         BackendErrorsMessagesModule
     ],
     declarations: [RegisterComponent],
-    providers: [AuthService]
+    providers: [AuthService, PersistanceService]
 })
 export class AuthModule { }
