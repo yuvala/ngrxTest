@@ -11,10 +11,10 @@ import { AuthResponseInterface } from "../types/authResponse.interface";
     providedIn: "root"
 })
 export class AuthService {
-    private basePAth = "";
-    constructor(private http: HttpClient) {}
+    private basePAth = '';
+    constructor(private http: HttpClient) { }
     register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-        const url = environment.apiUrl + "/api/users";
+        const url = environment.apiUrl + '/api/users';
         return this.http
             .post<AuthResponseInterface>(url, data)
             .pipe(map((res: AuthResponseInterface) => res.user));

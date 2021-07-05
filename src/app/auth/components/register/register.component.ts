@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { registerAction } from "src/app/auth/store/actions/register.actions";
 import { isSubmittingSelector, validationErrorsSelector } from "src/app/auth/store/selectors";
 import { AuthService } from "src/app/auth/services/auth.service";
-import { RegisterRequestInterface } from "../../types/registerRequest.interface";
+import { RegisterRequestInterface } from "src/app/auth/types/registerRequest.interface";
 import { BackendErrorsInterface } from "src/app/shared/types/backendErrors.interface";
 
 @Component({
@@ -14,6 +14,7 @@ import { BackendErrorsInterface } from "src/app/shared/types/backendErrors.inter
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.scss"]
 })
+
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     isSubmitting$: Observable<boolean>;
@@ -32,18 +33,19 @@ export class RegisterComponent implements OnInit {
 
     initializeForm(): void {
         this.form = this.fb.group({
-            username: ["", Validators.required],
-            email: ["", Validators.required],
-            password: ["", Validators.required]
+            username: ['', Validators.required],
+            email: ['', Validators.required],
+            password: ['', Validators.required]
         });
     }
+
     initializeValues(): void {
         this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
         this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
-        //console.log("isSubmitting$", this.isSubmitting$);
     }
+
     onSubmit(): void {
-        console.log("submit", this.form.value);
+        console.log('submit', this.form.value, this.form.valid);
         const request: RegisterRequestInterface = {
             user: this.form.value
         };

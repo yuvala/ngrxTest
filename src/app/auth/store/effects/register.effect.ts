@@ -10,7 +10,6 @@ import { AuthService } from "src/app/auth/services/auth.service";
 
 
 @Injectable()
-
 export class registerEffect {
     register$ = createEffect(() =>
         this.actions$.pipe(
@@ -21,7 +20,9 @@ export class registerEffect {
                         return registerSuccessAction({ currentUser });
                     }),
                     catchError((errorResponse: HttpErrorResponse) => {
-                        return of(registerFailureAction({ errors: errorResponse.error.errors }));
+                        return of(
+                            registerFailureAction({ errors: errorResponse.error.errors })
+                        );
                     })
                 );
             })
