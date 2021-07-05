@@ -8,22 +8,22 @@
                 </p>
                 <mc-backend-error-messages *ngIf="backendErrors$ | async" [backendError]="backendErrors$ | async">
                 </mc-backend-error-messages>
-                <form [formGroup]="form" class="ng-untouched ng-pristine ng-invalid" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <fieldset>
                         <fieldset class="form-group">
-                            <input class="form-control form-control-lg ng-untouched ng-pristine ng-valid"
-                                formControlName="username" placeholder="Username" type="text">
+                            <input type="text" class="form-control form-control-lg" placeholder="Username"
+                                formControlName="username" />
                         </fieldset>
-                        <fieldset class="form-group"><input
-                                class="form-control form-control-lg ng-untouched ng-pristine ng-invalid"
-                                formControlName="email" placeholder="Email" type="text">
+                        <fieldset class="form-group">
+						<input type="text" class="form-control form-control-lg" placeholder="Email"  formControlName="email" />
                         </fieldset>
-                        <fieldset class="form-group"><input
-                                class="form-control form-control-lg ng-untouched ng-pristine ng-invalid"
-                                formControlName="password" placeholder="Password" type="password">
+                        <fieldset class="form-group">
+						<input type="password" class="form-control form-control-lg " placeholder="Password" 
+						  formControlName="password"  />
                         </fieldset>
-                        <button class="btn btn-lg btn-primary pull-xs-right" type="submit"
-                            [disabled]="isSubmitting$ | async"> Sign up
+                         
+                        <button class="btn btn-lg btn-primary pull-xs-right" type="submit" [disabled]="isSubmitting$ | async"> 
+						Sign up
                         </button>
 
                     </fieldset>

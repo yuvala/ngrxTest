@@ -1,14 +1,13 @@
-import { state } from "@angular/animations";
-import { Action, createReducer, on } from "@ngrx/store";
+import {createReducer, on, Action} from '@ngrx/store'
 
 import { AuthStateInterface } from "src/app/auth/types/authState.interface";
 import { registerAction, registerFailureAction, registerSuccessAction } from "src/app/auth/store/actions/register.actions";
 
 const initialState: AuthStateInterface = {
     isSubmitting: false,
-    isLoggedIn: null,
     currentUser: null,
-    validationErrors: null
+    validationErrors: null,
+    isLoggedIn: null
 };
 
 
@@ -42,5 +41,5 @@ const authReducer = createReducer(
 );
 
 export function reducers(state: AuthStateInterface, action: Action) {
-    return authReducer(state, action);
+  return authReducer(state, action)
 }
