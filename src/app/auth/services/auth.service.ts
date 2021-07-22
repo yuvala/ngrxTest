@@ -15,9 +15,9 @@ export class AuthService {
     private basePAth = '';
     constructor(private http: HttpClient) { }
 
-getUser(result:AuthResponseInterface): CurrentUserInterface {
-    return result.user;
-}
+    getUser(result: AuthResponseInterface): CurrentUserInterface {
+        return result.user;
+    }
 
     register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
         const url = environment.apiUrl + '/api/users';
@@ -27,10 +27,10 @@ getUser(result:AuthResponseInterface): CurrentUserInterface {
     }
 
 
-    login(data: LoginRequestInterface):Observable<CurrentUserInterface>{
-        const url = environment.apiUrl + '/api/login';
+    login(data: LoginRequestInterface): Observable<CurrentUserInterface> {
+        const url = environment.apiUrl + '/api/users/login';
         return this.http
-        .post<AuthResponseInterface>(url, data)
-        .pipe(map(this.getUser));
+            .post<AuthResponseInterface>(url, data)
+            .pipe(map(this.getUser));
     }
 }
