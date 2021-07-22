@@ -8,14 +8,20 @@ import { EffectsModule } from "@ngrx/effects";
 import { RegisterComponent } from "src/app/auth/components/register/register.component";
 import { reducers } from "src/app/auth/store/reducers";
 import { AuthService } from "src/app/auth/services/auth.service";
-import { registerEffect } from "src/app/auth/store/effects/register.effect";
+import { RegisterEffect } from "src/app/auth/store/effects/register.effect";
 import { BackendErrorsMessagesModule } from "src/app/shared/backendErrorMessages/backendErrorMessages.module";
-import { PersistanceService } from "../shared/services/persistance.service";
+import { PersistanceService } from "src/app/shared/services/persistance.service";
+import { LoginEffect } from "src/app/auth/store/effects/login.effect";
+import { LoginComponent } from "src/app/auth/components/login/login.component";
 
 const routes: Routes = [
     {
-        path: "register",
+        path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
 ];
 
@@ -24,11 +30,11 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         ReactiveFormsModule,
-        StoreModule.forFeature("auth", reducers),
-        EffectsModule.forFeature([registerEffect]),
+        StoreModule.forFeature('auth', reducers),
+        EffectsModule.forFeature([RegisterEffect, LoginEffect]),
         BackendErrorsMessagesModule
     ],
-    declarations: [RegisterComponent],
+    declarations: [RegisterComponent, LoginComponent],
     providers: [AuthService, PersistanceService]
 })
 export class AuthModule { }
